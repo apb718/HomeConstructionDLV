@@ -1,4 +1,4 @@
-days(1..5).
+days(1..20).
 people(1..12).
 
 % Variable Sqft. (Minimum 1000) in quantities of 1000sqft.  This is due to DLV rounding.  Could be fixed using other langauge math
@@ -9,7 +9,7 @@ squareFootage(1000).
 % profession_time(profession, man-days, per # sqft)
 profession_time(foundation, 4, 1000).
 
-profession_time(carpenters, 30, 1000).
+profession_time(framing, 30, 1000).
 
 profession_time(plumbing, 3, 1000).
 profession_time(hvac, 3, 1000).

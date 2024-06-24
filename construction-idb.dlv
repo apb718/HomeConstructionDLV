@@ -9,12 +9,22 @@ usableDays(Profession, Job, Order, DaysNeeded) :- schedule(Profession, Job, Orde
 
 1={usableSchedule(Profession,Job, Order, Days, People) : days(Days), people(People), Days*People=DaysNeeded} :- usableDays(Profession, Job,Order, DaysNeeded).
 
+
+
+% totalTime(TotalTime) :- #sum{Days, X : usableSchedule(X, _, _, Days, _)} = TotalTime.
 % :- usableSchedule(Profession, Job, Order, Days, People), usableDays(Profession, Job, Order, DaysNeeded), DaysNeeded!= Days*People.
 
+
+
+
+:~ totalTime(TotalTime). [TotalTime@1]
 
 % :- usableSchedule(Profession, Order, Days, People), usableDays(Profession, Order, DaysNeeded), DaysNeeded >Days*People.
 % :- usableSchedule(Profession, Job, Order, FDays, FPeople), usableSchedule(Profession, Job, Order, SDays, SPeople), FDays!=SDays, FDays!=SPeople. 
 % #show profession/1.
 % #show construction_order/2.
 % #show profession_time/3.
+% #show usableDays/4.
+#show totalTime/1.
+
 #show usableSchedule/5.
