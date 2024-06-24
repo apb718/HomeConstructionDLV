@@ -1,4 +1,5 @@
-days(1..100).
+days(1..5).
+people(1..12).
 
 % Variable Sqft. (Minimum 1000) in quantities of 1000sqft.  This is due to DLV rounding.  Could be fixed using other langauge math
 squareFootage(1000).
