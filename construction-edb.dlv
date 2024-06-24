@@ -1,0 +1,52 @@
+% Variable Sqft.
+squareFootage(1000).
+% 
+
+% Times needed per profession by Sqft.
+% profession_time(profession, man-days, per # sqft)
+profession_time(foundation, 4, 1000).
+
+profession_time(framing, 3, 100).
+
+profession_time(plumbing, 3, 1000).
+profession_time(hvac, 3, 1000)
+profession_time(roofing, 2, 100).
+profession_time(electrical, 3, 1000)
+
+profession_time(drywall, 2, 100).
+profession_time(insulation, 4, 1000).
+
+profession_time(painting, 2, 100).
+
+profession_time(inspection, 1, 2500).
+
+
+
+% Worker payrates per hour (ohio basis)
+workerRate(general_labor, 20).
+workerRate(electricians, 30).
+workerRate(plumbers, 25).
+workerRate(carpenters, 20).
+workerRate(roofers, 20).
+
+
+% Order the constructions must be completed in
+construction_order(foundation,1).
+
+construction_order(framing, 2).
+
+construction_order(plumbing, 3).
+construction_order(hvac, 3).
+construction_order(roofing, 3).
+construction_order(electrical, 3).
+
+
+construction_order(insulation, 4).
+construction_order(drywall, 4).
+
+
+construction_order(painting, 5).
+
+construction_order(inspection, 6).
+
+
