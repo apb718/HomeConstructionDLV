@@ -2,11 +2,19 @@
 squareFootage(1000).
 % 
 
+
+% Different job titles
+profession(general_labor).
+profession(electricians).
+profession(plumbers).
+profession(carpenters).
+profession(roofers).
+
 % Times needed per profession by Sqft.
 % profession_time(profession, man-days, per # sqft)
 profession_time(foundation, 4, 1000).
 
-profession_time(framing, 3, 100).
+profession_time(carpenters, 3, 100).
 
 profession_time(plumbing, 3, 1000).
 profession_time(hvac, 3, 1000)
