@@ -7,10 +7,13 @@ usableDays(Profession, Job, Order, 1) :- schedule(Profession,Job, Order, 0).
 usableDays(Profession, Job, Order, DaysNeeded) :- schedule(Profession, Job, Order, DaysNeeded), DaysNeeded>0.
 
 
-usableSchedule(Profession,Job, Order, Days, People) :- usableDays(Profession, Job,Order, DaysNeeded), days(Days), people(People), Days*People = DaysNeeded.
+1={usableSchedule(Profession,Job, Order, Days, People) : days(Days), people(People), Days*People=DaysNeeded} :- usableDays(Profession, Job,Order, DaysNeeded).
+
+% :- usableSchedule(Profession, Job, Order, Days, People), usableDays(Profession, Job, Order, DaysNeeded), DaysNeeded!= Days*People.
+
 
 % :- usableSchedule(Profession, Order, Days, People), usableDays(Profession, Order, DaysNeeded), DaysNeeded >Days*People.
-:- usableSchedule(Profession, Job, Order, FDays, FPeople), usableSchedule(Profession, Job, Order, SDays, SPeople), FDays!=SDays, FDays!=SPeople. 
+% :- usableSchedule(Profession, Job, Order, FDays, FPeople), usableSchedule(Profession, Job, Order, SDays, SPeople), FDays!=SDays, FDays!=SPeople. 
 % #show profession/1.
 % #show construction_order/2.
 % #show profession_time/3.
