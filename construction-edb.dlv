@@ -1,7 +1,7 @@
 days(1..100).
 
 % Variable Sqft. (Minimum 1000) in quantities of 1000sqft.  This is due to DLV rounding.  Could be fixed using other langauge math
-squareFootage(500).
+squareFootage(1000).
 % 
 
 % Times needed per profession by Sqft.

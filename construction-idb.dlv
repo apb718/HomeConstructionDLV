@@ -7,9 +7,7 @@
 1={usableSchedule(Profession, Order, DaysNeeded)} :- schedule(Profession, Order, DaysNeeded), DaysNeeded>0.
 
 
-%  Remove schedules where there are more people assigned than necessary man-dayas
-% :- schedule(Profession, Order, Days), profession_time(Job, ManDays, PerSqft), squareFootage(Sqft),  ManDays/PerSqft*Sqft >Days .
-% 4 mans days / 1000sqft
+
 
 
 
