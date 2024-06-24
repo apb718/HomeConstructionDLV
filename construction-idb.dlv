@@ -1,8 +1,10 @@
 1={schedule(Profession, Order, DaysNeeded)} :- construction_order(Job, Profession, Order),  
                                              profession_time(Job, ManDays, PerSqft), 
                                              squareFootage(Sqft), 
-                                             SqftNum = PerSqft*Sqft,
-                                             DaysNeeded=ManDays/SqftNum.
+                                             DaysNeeded = (ManDays*Sqft)/PerSqft.
+
+1={usableSchedule(Profession, Order, 1)} :- schedule(Profession, Order, 0).
+1={usableSchedule(Profession, Order, DaysNeeded)} :- schedule(Profession, Order, DaysNeeded), DaysNeeded>0.
 
 
 %  Remove schedules where there are more people assigned than necessary man-dayas
@@ -15,4 +17,4 @@
 % #show profession/1.
 % #show construction_order/2.
 % #show profession_time/3.
-#show schedule/3.
+#show usableSchedule/3.
