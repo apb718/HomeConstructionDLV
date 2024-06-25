@@ -29,11 +29,11 @@ profession_time(inspection, 1, 2500).
 
 
 % Worker payrates per hour (ohio basis)
-workerRate(general_labor, 20).
-workerRate(electricians, 30).
-workerRate(plumbers, 25).
-workerRate(carpenters, 20).
-workerRate(roofers, 20).
+workerRate(general_labor, 160).
+workerRate(electricians, 240).
+workerRate(plumbers, 200).
+workerRate(carpenters, 160).
+workerRate(roofers, 160).
 
 
 % Order the constructions must be completed in

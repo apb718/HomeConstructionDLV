@@ -19,34 +19,35 @@ output = result.stdout
 
 # Split the output into lines and reverse it to find 'OPTIMUM' from the bottom
 lines = output.splitlines()
-optimum_index = -1
-for i, line in enumerate(reversed(lines)):
-    if "OPTIMUM" in line:
-        optimum_index = len(lines) - i - 1
-        break
+try:
+    optimum_index = lines.index('OPTIMUM')  # Find the exact line with 'OPTIMUM'
+except ValueError:
+    optimum_index = None
 
-pattern = r"usableSchedule\(([^)]+)\)"
-matches = re.findall(pattern, output)
+# Check if we found 'OPTIMUM' and ensure there is a line before it to process
+if optimum_index and optimum_index > 0:
+    required_line = lines[optimum_index - 1]  # Get the second to last line before 'OPTIMUM'
 
-input_data = []
+    # Use regular expression to extract usableSchedule entries
+    pattern = r"usableSchedule\(([^)]+)\)"
+    matches = re.findall(pattern, required_line)
 
-for match in matches:
-    # Split each match at commas and strip any whitespace, then convert to tuple
-    parts = match.split(',')
-    entry = (parts[0].strip(), parts[1].strip(), int(parts[2].strip()), int(parts[3].strip()), int(parts[4].strip()))
-    input_data.append(entry)
+    # Convert matches into a list of tuples
+    input_data = []
+    for match in matches:
+        # Split each match at commas and strip any whitespace, then convert to tuple
+        parts = match.split(',')
+        entry = (parts[0].strip(), parts[1].strip(), int(parts[2].strip()), int(parts[3].strip()), int(parts[4].strip()))
+        input_data.append(entry)
 
-# Print the formatted data
-# print("input_data = [")
-# for data in input_data:
-#     print(f"    {data},")
+    # Print the formatted data
+    print("input_data = [")
+    for data in input_data:
+        print(f"    {data},")
+    print("]")
 
-# Get the data set just above 'OPTIMUM' if found
-if optimum_index > 0:
-    required_set = lines[optimum_index - 1]
-    print("The required set is:", required_set)
 else:
-    print("No 'OPTIMUM' found in the output")
+    print("No 'OPTIMUM' found or no line before 'OPTIMUM' to process.")
 
 # Input data parsing
 def parse_input(input_data):
@@ -80,18 +81,22 @@ def create_timeline(tasks):
     for _, row in df.iterrows():
         start = order_dates[row['Order']]
         end = start + timedelta(days=row['DaysOfWork'])
-        ax.barh(row['Job'], (end - start).days, left=start, height=0.8,
+        ax.barh(row['Job'], (end - start).days, left=start, height=0.9,
                 label=f"{row['LaborType']} - {row['Workers']} workers",
                 color=plt.cm.viridis(row['Workers'] / df['Workers'].max()))
+        ax.annotate(f"{(end - start).days} days", xy=(start + (end - start) / 2, _),
+                    xytext=(0, 0), textcoords="offset points", va='center', ha='center')
+
         y_labels.append(f"Order {row['Order']}: {row['Job']} ({row['Workers']} workers)")
 
-    ax.set_xlabel('Time')
+    ax.set_xlabel('Days')
     ax.set_ylabel('Job')
     ax.set_yticks(range(len(y_labels)))
     ax.set_yticklabels(y_labels)
     ax.set_title('Job Schedule by Order')
     plt.gca().invert_yaxis()  # Invert y axis to show order 1 on top
     fig.tight_layout()
+    plt.gca().axes.get_xaxis().set_visible(False)
     plt.show()
 
 
