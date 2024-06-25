@@ -10,6 +10,8 @@ usableDays(Profession, Job, Order, DaysNeeded) :- schedule(Profession, Job, Orde
 1={usableSchedule(Profession,Job, Order, Days, People) : days(Days), people(People), Days*People=DaysNeeded} :- usableDays(Profession, Job,Order, DaysNeeded).
 
 
+
+% Gets the max amount of time taken in one day 
 timesOne(X) :- #max{R : usableSchedule(Profession, Job, 1, R, People)} = X.
 timesTwo(X) :- #max{R : usableSchedule(Profession, Job, 2, R, People)} = X.
 timesThree(X) :- #max{R : usableSchedule(Profession, Job, 3, R, People)} = X.
@@ -17,7 +19,9 @@ timesFour(X) :- #max{R : usableSchedule(Profession, Job, 4, R, People)} = X.
 timesFive(X) :- #max{R : usableSchedule(Profession, Job, 5, R, People)} = X.
 timesSix(X) :- #max{R : usableSchedule(Profession, Job, 6, R, People)} = X.
 
+totalWorkers(X) :- #sum{Workers : usableSchedule(Profession, Job, Order, _, Workers)} = X.
 
+#show totalWorkers/1.
 
 totalTime(TotalTime) :- timesOne(X1), timesTwo(X2), timesThree(X3), timesFour(X4), timesFive(X5), timesSix(X6), TotalTime=X1+X2+X3+X4+X5+X6. 
 % :- usableSchedule(Profession, Job, Order, Days, People), usableDays(Profession, Job, Order, DaysNeeded), DaysNeeded!= Days*People.
@@ -25,8 +29,8 @@ totalTime(TotalTime) :- timesOne(X1), timesTwo(X2), timesThree(X3), timesFour(X4
 
 
 
-:~ totalTime(TotalTime). [TotalTime@1]
-
+:~ totalTime(TotalTime). [TotalTime@2]
+:~ totalWorkers(Workers). [Workers@1]
 % :- usableSchedule(Profession, Order, Days, People), usableDays(Profession, Order, DaysNeeded), DaysNeeded >Days*People.
 % :- usableSchedule(Profession, Job, Order, FDays, FPeople), usableSchedule(Profession, Job, Order, SDays, SPeople), FDays!=SDays, FDays!=SPeople. 
 % #show profession/1.
