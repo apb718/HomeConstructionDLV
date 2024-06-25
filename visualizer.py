@@ -80,14 +80,16 @@ def create_timeline(tasks):
 
     for _, row in df.iterrows():
         start = order_dates[row['Order']]
-        end = start + timedelta(days=row['DaysOfWork'])
-        ax.barh(row['Job'], (end - start).days, left=start, height=0.9,
-                label=f"{row['LaborType']} - {row['Workers']} workers",
-                color=plt.cm.viridis(row['Workers'] / df['Workers'].max()))
-        ax.annotate(f"{(end - start).days} days", xy=(start + (end - start) / 2, _),
-                    xytext=(0, 0), textcoords="offset points", va='center', ha='center')
+        duration = row['DaysOfWork']
+        end = start + timedelta(days=duration)
+        bar = ax.barh(row['Job'], duration, left=start, height=0.8,
+                      color=plt.cm.viridis(row['Workers'] / df['Workers'].max()))
 
         y_labels.append(f"Order {row['Order']}: {row['Job']} ({row['Workers']} workers)")
+
+        # Annotate each bar with the number of days
+        ax.annotate(f"{duration} day(s)", xy=(start + timedelta(days=duration / 2), row['Job']),
+                    xytext=(0, 0), textcoords="offset points", va='center', ha='center')
 
     ax.set_xlabel('Days')
     ax.set_ylabel('Job')
