@@ -1,7 +1,7 @@
-days(1..80).
+days(1..20).
 people(1..12).
 
-% Variable Sqft   This is due to DLV rounding.  Could be fixed using other langauge math
+% Variable Sqft. (Minimum 1000) in quantities of 1000sqft.  This is due to DLV rounding.  Could be fixed using other langauge math
 squareFootage(3000).
 
 % Cost per sqft in construction
