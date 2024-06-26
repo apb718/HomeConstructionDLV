@@ -1,4 +1,4 @@
-days(1..80).
+days(1..27720).
 people(1..12).
 
 % Variable Sqft   This is due to DLV rounding.  Could be fixed using other langauge math
@@ -24,7 +24,7 @@ profession_time(insulation, 4, 1000).
 
 profession_time(painting, 20, 1000).
 
-profession_time(inspection, 1, 2500).
+profession_time(inspection, 1, 3000).
 
 
 

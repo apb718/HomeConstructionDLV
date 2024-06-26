@@ -4,38 +4,31 @@ import pandas as pd
 import subprocess
 import re
 
-# Assuming your script is named 'run_script.sh' and it's executable
 command = [
     '/Users/alecbyrd/Documents/Italy2024/dlv-2.1.2-arm64',
     '/Users/alecbyrd/Documents/Italy2024/cse468/HomeConstructionDLV/construction-edb.dlv',
     '/Users/alecbyrd/Documents/Italy2024/cse468/HomeConstructionDLV/construction-idb.dlv',
     '-n', '0'
 ]
-# Run the script and capture the output
 result = subprocess.run(command, stdout=subprocess.PIPE, text=True)
 
-# Get the output as a string
 output = result.stdout
 
-# Split the output into lines and reverse it to find 'OPTIMUM' from the bottom
 lines = output.splitlines()
 try:
-    optimum_index = lines.index('OPTIMUM')  # Find the exact line with 'OPTIMUM'
+    optimum_index = lines.index('OPTIMUM')  
 except ValueError:
     optimum_index = None
 
-# Check if we found 'OPTIMUM' and ensure there is a line before it to process
 if optimum_index and optimum_index > 0:
-    required_line = lines[optimum_index - 1]  # Get the second to last line before 'OPTIMUM'
+    required_line = lines[optimum_index - 1]  
 
-    # Use regular expression to extract usableSchedule entries
     pattern = r"usableSchedule\(([^)]+)\)"
     matches = re.findall(pattern, required_line)
 
     # Convert matches into a list of tuples
     input_data = []
     for match in matches:
-        # Split each match at commas and strip any whitespace, then convert to tuple
         parts = match.split(',')
         entry = (parts[0].strip(), parts[1].strip(), int(parts[2].strip()), int(parts[3].strip()), int(parts[4].strip()))
         input_data.append(entry)
@@ -49,7 +42,6 @@ if optimum_index and optimum_index > 0:
 else:
     print("No 'OPTIMUM' found or no line before 'OPTIMUM' to process.")
 
-# Input data parsing
 def parse_input(input_data):
     tasks = []
     for item in input_data:
@@ -87,7 +79,6 @@ def create_timeline(tasks):
 
         y_labels.append(f"Order {row['Order']}: {row['Job']} ({row['Workers']} workers)")
 
-        # Annotate each bar with the number of days
         ax.annotate(f"{duration} day(s)", xy=(start + timedelta(days=duration / 2), row['Job']),
                     xytext=(0, 0), textcoords="offset points", va='center', ha='center')
 
@@ -96,7 +87,7 @@ def create_timeline(tasks):
     ax.set_yticks(range(len(y_labels)))
     ax.set_yticklabels(y_labels)
     ax.set_title('Job Schedule by Order')
-    plt.gca().invert_yaxis()  # Invert y axis to show order 1 on top
+    plt.gca().invert_yaxis() 
     fig.tight_layout()
     plt.gca().axes.get_xaxis().set_visible(False)
     plt.show()
