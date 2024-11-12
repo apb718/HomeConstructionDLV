@@ -1,8 +1,8 @@
-days(1..27720).
+days(1..20).
 people(1..12).
 
-% Variable Sqft   This is due to DLV rounding.  Could be fixed using other langauge math
-squareFootage(1000).
+% Variable Sqft. (Minimum 1000) in quantities of 1000sqft.  This is due to DLV rounding.  Could be fixed using other langauge math
+squareFootage(5000).
 
 % Cost per sqft in construction
 sqftCost(125).
@@ -24,7 +24,7 @@ profession_time(insulation, 4, 1000).
 
 profession_time(painting, 20, 1000).
 
-profession_time(inspection, 1, 3000).
+profession_time(inspection, 1, 2500).
 
 
 

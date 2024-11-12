@@ -1,5 +1,5 @@
 % Constraint for something like limiting electricians to under 4
-% :- usableSchedule(Profession,electrical,Order,Days,People), People>4.
+:- usableSchedule(Profession,foundation,Order,Days,People), People>2.
 
 
 
@@ -31,7 +31,7 @@ totalTime(TotalTime) :- timesOne(X1), timesTwo(X2), timesThree(X3), timesFour(X4
 totalWorkers(X) :- #sum{Workers : usableSchedule(Profession, Job, Order, _, Workers)} = X.
 
 % Prioritizes shortest time possible, then the minimum amount of workers.
-% :~ totalWorkers(Workers). [-Workers@1]
+:~ totalWorkers(Workers). [Workers@1]
 :~ totalTime(TotalTime). [TotalTime@2]
 
 % laborCost(X) :- #sum{WorkerPays : usableSchedule(Profession, Job, Order, Days, People), workerRate(Profession, Pay), WorkerPays = Pay*Days*People}.
